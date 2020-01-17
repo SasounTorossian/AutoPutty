@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81638581-5a0d-4aec-9f8f-15bcbcea2645" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AutoPutty.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AutoPutty.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoPutty.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoPutty.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Connection type.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keyboard.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serial line.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Session.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Speed.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/The Backspace key.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/The Function keys and keypad.PNG" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,13 +23,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1WW4rxGJFmdQoq8T7WJZWYQ3buy" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -97,7 +90,28 @@
       <option name="presentableId" value="Default" />
       <updated>1579252219532</updated>
     </task>
+    <task id="LOCAL-00001" summary="Organised images in to work and home.&#10;images and file path combine in new list comprehension.">
+      <created>1579298115735</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579298115735</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Work and Home Folders">
+      <created>1579298192677</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1579298192677</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Organised images in to work and home.&#10;images and file path combine in new list comprehension." />
+    <MESSAGE value="Work and Home Folders" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work and Home Folders" />
   </component>
   <component name="WindowStateProjectService">
     <state x="331" y="134" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579285913478">
@@ -105,6 +119,10 @@
     </state>
     <state x="331" y="134" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1579285913478" />
     <state x="4254" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1920.1020/0.0.1280.680/3840.0.1920.1040@3840.0.1920.1040" timestamp="1579253539010" />
+    <state x="425" y="7" width="788" height="810" key="CommitChangelistDialog2" timestamp="1579298192143">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="7" width="788" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579298192143" />
     <state x="4580" y="276" key="FileChooserDialogImpl" timestamp="1579253535061">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -147,5 +165,9 @@
     <state x="242" y="68" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1579287206117" />
     <state x="2223" y="84" key="SettingsEditor/1920.0.1920.1020/0.0.1280.680/3840.0.1920.1040@1920.0.1920.1020" timestamp="1579261923490" />
     <state x="4608" y="144" key="SettingsEditor/1920.0.1920.1020/0.0.1280.680/3840.0.1920.1040@3840.0.1920.1040" timestamp="1579253510348" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1579298120223">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579298120223" />
   </component>
 </project>
