@@ -4,7 +4,7 @@ import time
 import psutil
 import pyperclip
 
-# Baud Rate and com port to communicate with nrf52840 Device via USB
+# Baud Rate and com port to communicate with nrf52840 Device via USB. Might not be needed.
 BAUD_RATE = '115200'
 COM_PORT = 'COM10'  # Not guaranteed (Prompt user for COM port number?)
 
@@ -17,14 +17,13 @@ CTRL = 'ctrl'
 SHIFT = 'shift'
 TAB = 'tab'
 ENTER = 'enter'
-PUTTY_COMMAND_LIST = [TAB, TAB, TAB, TAB, DOWN, DOWN]
-
+PUTTY_COMMAND_LIST = [TAB, TAB, TAB, TAB, DOWN, DOWN, ENTER]
 
 # BDB setup commands
 BDB_CHANNEL = 'bdb channel 16'
 BDB_ROLE = 'bdb role zc'
 BDB_START = 'bdb start'
-BDB_COMMAND_LIST = [BDB_CHANNEL, BDB_ROLE, BDB_START]
+BDB_COMMAND_LIST = [BDB_CHANNEL, ENTER, BDB_ROLE, ENTER, BDB_START, ENTER]
 
 # ZDO commands
 ZDO_MATCH_DESC = 'zdo match_desc 0xfffd 0xfffd 0x0104 1 0 0'
@@ -64,11 +63,12 @@ time.sleep(0.1)
 for commands in PUTTY_COMMAND_LIST:
     pyautogui.press(commands)
 
+pyautogui.press(ENTER)  # Get's rid of error message during testing.
+
 # Configure CLI device as coordinator
 time.sleep(0.1)
 for commands in BDB_COMMAND_LIST:
-    pyautogui.press(word_to_list(commands))
-    pyautogui.press(ENTER)
+    pyautogui.press(commands if commands == ENTER else word_to_list(commands))
 
 # time.sleep(5) # Need to wait until connection established with all devices
 # for commands in ZDO_COMMAND_LIST:
