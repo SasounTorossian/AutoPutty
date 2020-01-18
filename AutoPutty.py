@@ -3,6 +3,8 @@ import pyautogui
 import time
 import psutil
 
+# Write start of BDB commands
+
 # Baud Rate and com port to communicate with nrf52840 Device via USB
 BAUD_RATE = '115200'
 COM_PORT = 'COM10'  # Not guaranteed (Prompt user for COM port number?)
@@ -25,12 +27,18 @@ BASE_IMAGE_SEQUENCE = ['Keyboard.PNG'
                         , 'Serial line.PNG']
 
 # Create final image list with correct file path pre-appended
+# combine with iteration? slow down?
+# in func?
 file_image_sequence = [(HOME_FOLDER + image) for image in BASE_IMAGE_SEQUENCE]
 
 
 # Converts strings to array of characters
 def word_to_list(word):
     return list(word)
+
+
+baud_rate = word_to_list(BAUD_RATE)
+com_port = word_to_list(COM_PORT)
 
 
 # Much better error handling here. Don't want to accidentally spawn too many instances
@@ -49,27 +57,49 @@ def check_kill_open_putty(process_name):
 
 check_kill_open_putty("Putty")
 
+
 '''Configure putty'''
 # error handling
 s = time.time()
 
 # put in func
-for images in file_image_sequence:
-    try:
-        x, y = pyautogui.locateCenterOnScreen(images, region=PUTTY_WINDOW_HOME)
-    except (RuntimeError, TypeError, NameError):
-        print("could not find image")
-    else:
-        pyautogui.click(x, y)
-        if images == 'home images/Speed.PNG':
-            pyautogui.click(x, y)
-            pyautogui.press(word_to_list(BAUD_RATE))
-        elif images == 'home images/Serial line.PNG':
-            pyautogui.click(x, y)
-            pyautogui.press(word_to_list(COM_PORT))
+# understand try: except: better
+# key:pair for image and action e.g. home image/Speed.PNG : [double_click, press]
+# Dictionary!!!
+
+# REPLACE IMAGE FINDS AND CLICKS WITH BUTTON PRESSES (tab, shift+tab, left, right, enter)
+# Can just have saves settings for PUTTY. Well, that was a waste >:(
+
+pyautogui.press('tab', presses=2)
+pyautogui.press('right')
+pyautogui.hotkey('shift', 'tab')
+pyautogui.press(baud_rate)
+pyautogui.hotkey('shift', 'tab')
+pyautogui.press(com_port)
+pyautogui.hotkey('shift', 'tab')
+pyautogui.press('k')
+pyautogui.press('tab')
+pyautogui.press('left')
+pyautogui.press('tab', presses=2)
+pyautogui.press('right', presses=5)
+
+# for images in file_image_sequence:
+#     try:
+#         x, y = pyautogui.locateCenterOnScreen(images, region=PUTTY_WINDOW_HOME, grayscale=True)
+#     except (RuntimeError, TypeError, NameError):
+#         print("could not find image")
+#     else:
+#         pyautogui.click(x, y)
+#         if images == 'home images/Speed.PNG':
+#             pyautogui.click(x, y)
+#             pyautogui.press(baud_rate)
+#         elif images == 'home images/Serial line.PNG':
+#             pyautogui.click(x, y)
+#             pyautogui.press(com_port)
 
 e = time.time()
 print(e - s)
 
-pyautogui.press('enter')
+# pyautogui.press('enter')
+
 # Error handling in case com port can't open
