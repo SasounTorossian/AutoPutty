@@ -2,43 +2,44 @@ import subprocess
 import pyautogui
 import time
 import psutil
-
-# Write start of BDB commands
+import pyperclip
 
 # Baud Rate and com port to communicate with nrf52840 Device via USB
 BAUD_RATE = '115200'
 COM_PORT = 'COM10'  # Not guaranteed (Prompt user for COM port number?)
 
-# folder position to append depending on development on home computer or work computer
-WORK_FOLDER = 'work images/'
-HOME_FOLDER = 'home images/'
+# Putty configure
+UP = 'up'
+DOWN = 'down'
+LEFT = 'left'
+RIGHT = 'right'
+CTRL = 'ctrl'
+SHIFT = 'shift'
+TAB = 'tab'
+ENTER = 'enter'
+PUTTY_COMMAND_LIST = [TAB, TAB, TAB, TAB, DOWN, DOWN]
 
-# (x, y, width, height), used in "region" to narrow down search area.
-PUTTY_WINDOW_WORK = (620, 200, 675, 675)
-PUTTY_WINDOW_HOME = (660, 265, 600, 540)
 
-# Sequence of image to search in putty
-BASE_IMAGE_SEQUENCE = ['Keyboard.PNG'
-                        , 'The Backspace key.PNG'
-                        , 'The Function keys and keypad.PNG'
-                        , 'Session.PNG'
-                        , 'Connection type.PNG'
-                        , 'Speed.PNG'
-                        , 'Serial line.PNG']
+# BDB setup commands
+BDB_CHANNEL = 'bdb channel 16'
+BDB_ROLE = 'bdb role zc'
+BDB_START = 'bdb start'
+BDB_COMMAND_LIST = [BDB_CHANNEL, BDB_ROLE, BDB_START]
 
-# Create final image list with correct file path pre-appended
-# combine with iteration? slow down?
-# in func?
-file_image_sequence = [(HOME_FOLDER + image) for image in BASE_IMAGE_SEQUENCE]
+# ZDO commands
+ZDO_MATCH_DESC = 'zdo match_desc 0xfffd 0xfffd 0x0104 1 0 0'
+ZDO_COMMAND_LIST = [ZDO_MATCH_DESC]
+
+# Fake match_desc response
+# MATCH_DESC_RESP_1 = 'src_addr=29D5 ep=10'
+# MATCH_DESC_RESP_2 = 'src_addr=123F ep=1'
+# MATCH_DESC_RESP_3 = 'src_addr=8EC1 ep=10'
+# MATCH_DESC_RESP_LIST = [MATCH_DESC_RESP_1, MATCH_DESC_RESP_2, MATCH_DESC_RESP_3]
 
 
 # Converts strings to array of characters
 def word_to_list(word):
     return list(word)
-
-
-baud_rate = word_to_list(BAUD_RATE)
-com_port = word_to_list(COM_PORT)
 
 
 # Much better error handling here. Don't want to accidentally spawn too many instances
@@ -52,54 +53,28 @@ def check_kill_open_putty(process_name):
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
     subprocess.Popen([r"C:\Program Files\PuTTY\putty.exe"])
-    time.sleep(0.5)
 
 
-check_kill_open_putty("Putty")
-
-
-'''Configure putty'''
-# error handling
 s = time.time()
 
-# put in func
-# understand try: except: better
-# key:pair for image and action e.g. home image/Speed.PNG : [double_click, press]
-# Dictionary!!!
+# Open and configure Putty
+check_kill_open_putty("Putty")
 
-# REPLACE IMAGE FINDS AND CLICKS WITH BUTTON PRESSES (tab, shift+tab, left, right, enter)
-# Can just have saves settings for PUTTY. Well, that was a waste >:(
+time.sleep(0.1)
+for commands in PUTTY_COMMAND_LIST:
+    pyautogui.press(commands)
 
-pyautogui.press('tab', presses=2)
-pyautogui.press('right')
-pyautogui.hotkey('shift', 'tab')
-pyautogui.press(baud_rate)
-pyautogui.hotkey('shift', 'tab')
-pyautogui.press(com_port)
-pyautogui.hotkey('shift', 'tab')
-pyautogui.press('k')
-pyautogui.press('tab')
-pyautogui.press('left')
-pyautogui.press('tab', presses=2)
-pyautogui.press('right', presses=5)
+# Configure CLI device as coordinator
+time.sleep(0.1)
+for commands in BDB_COMMAND_LIST:
+    pyautogui.press(word_to_list(commands))
+    pyautogui.press(ENTER)
 
-# for images in file_image_sequence:
-#     try:
-#         x, y = pyautogui.locateCenterOnScreen(images, region=PUTTY_WINDOW_HOME, grayscale=True)
-#     except (RuntimeError, TypeError, NameError):
-#         print("could not find image")
-#     else:
-#         pyautogui.click(x, y)
-#         if images == 'home images/Speed.PNG':
-#             pyautogui.click(x, y)
-#             pyautogui.press(baud_rate)
-#         elif images == 'home images/Serial line.PNG':
-#             pyautogui.click(x, y)
-#             pyautogui.press(com_port)
+# time.sleep(5) # Need to wait until connection established with all devices
+# for commands in ZDO_COMMAND_LIST:
+#     pyautogui.press(word_to_list(commands))
+#     pyautogui.press(ENTER)
 
 e = time.time()
 print(e - s)
 
-# pyautogui.press('enter')
-
-# Error handling in case com port can't open
