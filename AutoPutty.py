@@ -59,22 +59,27 @@ s = time.time()
 # Open and configure Putty
 check_kill_open_putty("Putty")
 
-time.sleep(0.1)
+time.sleep(0.2
+           )
 for commands in PUTTY_COMMAND_LIST:
     pyautogui.press(commands)
 
-pyautogui.press(ENTER)  # Get's rid of error message during testing.
+# pyautogui.press(ENTER)  # Get's rid of error message during testing.
 
 # Configure CLI device as coordinator
-time.sleep(0.1)
+time.sleep(0.2)
 for commands in BDB_COMMAND_LIST:
     pyautogui.press(commands if commands == ENTER else word_to_list(commands))
 
-# time.sleep(5) # Need to wait until connection established with all devices
-# for commands in ZDO_COMMAND_LIST:
-#     pyautogui.press(word_to_list(commands))
-#     pyautogui.press(ENTER)
+time.sleep(5)  # Need to wait until connection established with all devices
+for commands in ZDO_COMMAND_LIST:
+    pyautogui.press(word_to_list(commands))
+    pyautogui.press(ENTER)
+
+''' if failure = sending broadcast request (wait and resend?)(reset command)
+    if success = src_addr (triple click)(ctrl+c)(paste in code)
+    > src_addr=9826 ep=10 (do some regex magic) to find number.
+'''
 
 e = time.time()
 print(e - s)
-
